@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:listaprodutos/datas/usuario.dart';
+import 'package:listaprodutos/screens/cadastro_produtos_screen.dart';
 import 'package:listaprodutos/screens/login_screen.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'screens/home_screen.dart';
@@ -29,16 +30,10 @@ class _myAppState extends State<myApp> {
                   primaryColor: Colors.grey[800]
               ),
               title: 'Lista de Produtos',
-              home: model.isLogado() ? HomeScreen() : LoginScreen(),
+              home: CadastroProdutosScreen(),
             );
           },
         ));
   }
-
-//  @override
-//  void initState() {
-//    super.initState();
-//    print(Usuario.of(context).firebaseUser.displayName);
-//  }
 }
 
