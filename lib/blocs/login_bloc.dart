@@ -22,6 +22,7 @@ class LoginBloc {
   Function(String) get mudarNome => _nome.sink.add;
   Function(String) get mudarEmail => _email.sink.add;
   Function(String) get mudarSenha => _senha.sink.add;
+  Function(bool) get statusLogin => _isLogado.sink.add;
   Function(bool) get mostrarProgress => _isLogado.sink.add;
 
   final _validarEmail =

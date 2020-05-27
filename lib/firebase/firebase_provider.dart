@@ -82,7 +82,11 @@ class FirebaseProvider {
 
   Future<bool> isSignedIn() async {
     final currentUser = await _firebaseAuth.currentUser();
-    return currentUser != null;
+    if (currentUser != null){
+      return true;
+    }else{
+    return false;
+    }
   }
 
   Future<FirebaseUser> getUser() async {

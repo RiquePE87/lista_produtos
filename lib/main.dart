@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:listaprodutos/datas/usuario.dart';
 import 'package:listaprodutos/screens/cadastro_produtos_screen.dart';
 import 'package:listaprodutos/screens/login_screen.dart';
-import 'package:listaprodutos/screens/my_app.dart';
+import 'package:listaprodutos/ui/my_app.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'screens/home_screen.dart';
 import 'screens/cadastro_screen.dart';

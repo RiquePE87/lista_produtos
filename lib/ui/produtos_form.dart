@@ -34,25 +34,16 @@ class _ProdutosFormState extends State<ProdutosForm> {
           itemCount: snapshot.data.length,
         );
         else
-           return Container(
-             child: RaisedButton(
-              child: Text('Cadastrar Produto'),
-              onPressed: (){
-                Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Cadastro()));
-              },
-          ),
+           return Center(
+             child: Text('Adicione um Produto'),
            );
-
       },
     );
   }
 
-
   @override
   void initState() {
     super.initState();
-//    _bloc = ProdutoBlocProvider.of(context);
-//    _loginBloc = LoginBlocProvider.of(context);
   }
 
   @override

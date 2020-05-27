@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:listaprodutos/screens/login_screen.dart';
 import 'package:listaprodutos/ui/cadastro.dart';
+import 'package:listaprodutos/ui/login_screen.dart';
 import 'package:listaprodutos/ui/produtos_form.dart';
 
 class Produtos extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

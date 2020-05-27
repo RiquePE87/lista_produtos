@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:listaprodutos/blocs/login_bloc.dart';
 import 'package:listaprodutos/blocs/login_bloc_provider.dart';
-import 'package:listaprodutos/screens/home_screen.dart';
 import 'package:listaprodutos/ui/produtos.dart';
 import 'package:listaprodutos/ui/produtos_form.dart';
 
@@ -14,6 +13,7 @@ class _LoginFormState extends State<LoginForm> {
   LoginBloc _bloc;
   @override
   Widget build(BuildContext context) {
+    _bloc.fazerLogOut();
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -24,20 +24,23 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
+
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _bloc = LoginBlocProvider.of(context);
-    _bloc.fazerLogOut();
   }
 
+  @override
+  void initState() {
 
+  }
 
   @override
   void dispose() {
     super.dispose();
     _bloc.dispose();
-
   }
 
   Widget campoNome() {

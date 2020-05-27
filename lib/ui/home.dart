@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:listaprodutos/blocs/login_bloc.dart';
 import 'package:listaprodutos/blocs/login_bloc_provider.dart';
-import 'package:listaprodutos/screens/login_screen.dart';
+import 'package:listaprodutos/ui/login_screen.dart';
 import 'package:listaprodutos/ui/produtos.dart';
 
 class Home extends StatefulWidget {
@@ -28,6 +28,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return bloc.isLogado != null ? Produtos() : LoginScreen();
+    return bloc.statusLogin != null ? Produtos() : LoginScreen();
   }
 }
