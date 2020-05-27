@@ -28,12 +28,16 @@ class _LoginFormState extends State<LoginForm> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     _bloc = LoginBlocProvider.of(context);
+    _bloc.fazerLogOut();
   }
+
+
 
   @override
   void dispose() {
     super.dispose();
     _bloc.dispose();
+
   }
 
   Widget campoNome() {
@@ -93,7 +97,7 @@ class _LoginFormState extends State<LoginForm> {
   _autenticarUsuario() {
     _bloc.entrarConta().then((onValue){
       Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => Produtos()));
+            .pushReplacement(MaterialPageRoute(builder: (context) => Produtos()));
     });
 //    _bloc.entrarConta().then((onValue) {
 //      if (!onValue) {

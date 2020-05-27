@@ -1,3 +1,4 @@
+import 'package:carousel_pro/carousel_pro.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:listaprodutos/blocs/login_bloc.dart';
@@ -19,6 +20,8 @@ class _CadastroFormState extends State<CadastroForm> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
+        imagem(),
+        Text('Adicionar Foto'),
         campoNome(),
         campoDescricao(),
         campoPreco(),
@@ -51,7 +54,33 @@ class _CadastroFormState extends State<CadastroForm> {
       builder: (context, AsyncSnapshot<String> snapshot) {
         return TextField(
           onChanged: _bloc.mudarNome,
-          decoration: InputDecoration(errorText: snapshot.error, hintText: 'Nome'),
+          decoration: InputDecoration(errorText: snapshot.error, hintText: 'Título'),
+        );
+      },
+    );
+  }
+  
+  Widget imagem(){
+    return StreamBuilder(
+      stream: _bloc.imagem,
+      builder: (context, AsyncSnapshot<String> snapshot){
+        return Container(
+         width: 150,
+          height: 200,
+          child: AspectRatio(
+            aspectRatio: 0.9,
+            child: Image.asset('images/placeholder.png')
+//            Carousel(
+//              images: [snapshot.data['image']],
+//              boxFit: BoxFit.cover,
+//              defaultImage: Image.asset('images/placeholder.png'),
+//              dotSize: 4.0,
+//              dotSpacing: 15.0,
+//              dotBgColor: Colors.transparent,
+//              dotColor: Theme.of(context).primaryColor,
+//              autoplay: false,
+//            ),
+          )
         );
       },
     );
@@ -63,7 +92,7 @@ class _CadastroFormState extends State<CadastroForm> {
       builder: (context, AsyncSnapshot<String> snapshot) {
         return TextField(
           onChanged: _bloc.mudarDescricao,
-          decoration: InputDecoration(errorText: snapshot.error, hintText: 'E-mail'),
+          decoration: InputDecoration(errorText: snapshot.error, hintText: 'Descrição'),
         );
       },
     );
@@ -74,8 +103,9 @@ class _CadastroFormState extends State<CadastroForm> {
       stream: _bloc.preco,
       builder: (context, AsyncSnapshot<String> snapshot) {
         return TextField(
+          keyboardType: TextInputType.numberWithOptions(),
           onChanged: _bloc.mudarPreco,
-          decoration: InputDecoration(errorText: snapshot.error, hintText: 'E-mail'),
+          decoration: InputDecoration(errorText: snapshot.error, hintText: 'Preço'),
         );
       },
     );
@@ -83,12 +113,14 @@ class _CadastroFormState extends State<CadastroForm> {
 
   Widget button() {
     return RaisedButton(
-      child: Text('Entrar'),
+      child: Text('Salvar'),
       onPressed: () {
         if (_bloc.validarCampos()){
 
           _bloc.mudarUsuarioId(usuario.uid);
+          _bloc.mudarImagem('imagem');
           _bloc.registrarProduto();
+          Navigator.of(context).pop();
         } else {
           showErrorMessage();
         }

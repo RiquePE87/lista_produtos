@@ -70,7 +70,7 @@ class FirebaseProvider {
 
   Future<List<Produto>> getListaProdutos(String usuarioId) async{
 
-    List<Produto> produtos;
+    List<Produto> produtos = [];
     QuerySnapshot snapshot = await _firestore.collection('usuarios').document(usuarioId).collection('produtos').getDocuments();
 
     if (snapshot.documents.isNotEmpty)

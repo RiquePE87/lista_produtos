@@ -12,7 +12,7 @@ class Produto{
   Produto.fromDocument(DocumentSnapshot snapshot){
     id = snapshot.documentID;
     usuarioId = snapshot.data['usuarioId'];
-    titulo = snapshot.data['titulo'];
+    titulo = snapshot.data['nome'];
     descricao = snapshot.data['descricao'];
     image = snapshot.data['imagem'];
   }
