@@ -11,7 +11,12 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   LoginBloc bloc;
+  bool status;
 
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   void didChangeDependencies() {
@@ -28,6 +33,14 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return bloc.statusLogin != null ? Produtos() : LoginScreen();
+    bloc.estaLogado().then((value) {
+      print(value);
+      this.status = value;
+      return status;
+    });
+    if (status != null)
+      return status ? Produtos() : LoginScreen();
+    else
+      return Container();
   }
 }

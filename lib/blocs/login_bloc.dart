@@ -15,15 +15,15 @@ class LoginBloc {
   Stream<String> get nome => _nome.stream;
   Stream<String> get email => _email.stream.transform(_validarEmail);
   Stream<String> get senha => _senha.stream.transform(_validarSenha);
-  Stream<bool> get isLogado => _isLogado.stream;
+  Stream<bool> get statusLogin => _isLogado.stream;
 
   String get endEmail => _email.value;
 
   Function(String) get mudarNome => _nome.sink.add;
   Function(String) get mudarEmail => _email.sink.add;
   Function(String) get mudarSenha => _senha.sink.add;
-  Function(bool) get statusLogin => _isLogado.sink.add;
-  Function(bool) get mostrarProgress => _isLogado.sink.add;
+  Function(bool) get mostrarProgressBar => _isLogado.sink.add;
+
 
   final _validarEmail =
       StreamTransformer<String, String>.fromHandlers(handleData: (email, sink) {

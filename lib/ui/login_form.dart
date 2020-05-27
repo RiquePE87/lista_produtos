@@ -24,8 +24,6 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
-
-
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -86,7 +84,7 @@ class _LoginFormState extends State<LoginForm> {
 
   Widget botaoEntrar() {
     return StreamBuilder(
-      stream: _bloc.isLogado,
+      stream: _bloc.statusLogin,
       builder: (context, AsyncSnapshot<bool> snapshot) {
         if (!snapshot.hasData || snapshot.error) {
           return button();
@@ -98,6 +96,7 @@ class _LoginFormState extends State<LoginForm> {
   }
 
   _autenticarUsuario() {
+    //_bloc.mostrarProgressBar(true);
     _bloc.entrarConta().then((onValue){
       Navigator.of(context)
             .pushReplacement(MaterialPageRoute(builder: (context) => Produtos()));

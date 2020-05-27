@@ -17,6 +17,7 @@ class ProdutosForm extends StatefulWidget {
 class _ProdutosFormState extends State<ProdutosForm> {
   ProdutoBloc _bloc;
   LoginBloc _loginBloc;
+  List<Produto> list = [];
   @override
   Widget build(BuildContext context) {
     return listProduto();
@@ -25,17 +26,20 @@ class _ProdutosFormState extends State<ProdutosForm> {
   Widget listProduto() {
     return StreamBuilder(
       stream: _bloc.produtoList,
+      initialData:list,
       builder: (context, AsyncSnapshot<List<Produto>> snapshot) {
-        if (snapshot.hasData)
+        if (snapshot.hasData && snapshot.data.length > 0)
         return ListView.builder(
           itemBuilder: (context, index) {
             return CardProduto(snapshot.data[index]);
           },
           itemCount: snapshot.data.length,
         );
-        else
+        else if (snapshot.data.length == 0){
+          return Center(child: Text('Adicione um produto'));
+        }
            return Center(
-             child: Text('Adicione um Produto'),
+             child: CircularProgressIndicator(),
            );
       },
     );

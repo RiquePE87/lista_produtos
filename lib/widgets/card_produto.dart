@@ -17,7 +17,7 @@ class CardProduto extends StatelessWidget {
           Flexible(
               flex: 1,
               child: produto.image.contains('image') ? Image.asset(('images/placeholder.png'), fit: BoxFit.cover, height: 150)
-          : Image.network(produto.image)),
+          : Image.network(produto.image, fit: BoxFit.cover, height: 150)),
           Flexible(
             flex: 1,
             child: Column(
