@@ -47,7 +47,7 @@ class FirebaseProvider {
     _firebaseUser = null;
   }
 
-  void salvarProduto(String nome, String descricao, String preco, String imagem, String usuario) async {
+  void salvarProduto(String nome, String descricao, double preco, String imagem, String usuario) async {
     Map<String, dynamic> produto = {
       'usuarioId': usuario,
       'nome': nome,
@@ -77,6 +77,7 @@ class FirebaseProvider {
     for (DocumentSnapshot snap in snapshot.documents){
       produtos.add(Produto.fromDocument(snap));
     }
+    produtos.reversed;
     return produtos;
   }
 

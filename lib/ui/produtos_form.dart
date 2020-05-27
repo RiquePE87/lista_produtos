@@ -4,10 +4,7 @@ import 'package:listaprodutos/blocs/login_bloc_provider.dart';
 import 'package:listaprodutos/blocs/produto_bloc.dart';
 import 'package:listaprodutos/blocs/produto_bloc_provider.dart';
 import 'package:listaprodutos/datas/produto.dart';
-import 'package:listaprodutos/ui/cadastro_form.dart';
 import 'package:listaprodutos/widgets/card_produto.dart';
-
-import 'cadastro.dart';
 
 class ProdutosForm extends StatefulWidget {
   @override
@@ -26,28 +23,24 @@ class _ProdutosFormState extends State<ProdutosForm> {
   Widget listProduto() {
     return StreamBuilder(
       stream: _bloc.produtoList,
-      initialData:list,
+      initialData: list,
       builder: (context, AsyncSnapshot<List<Produto>> snapshot) {
-        if (snapshot.hasData && snapshot.data.length > 0)
-        return ListView.builder(
-          itemBuilder: (context, index) {
-            return CardProduto(snapshot.data[index]);
-          },
-          itemCount: snapshot.data.length,
-        );
-        else if (snapshot.data.length == 0){
+        if (snapshot.hasData && snapshot.data.length > 0) {
+          return ListView.builder(
+            itemBuilder: (context, index) {
+              return CardProduto(snapshot.data[index]);
+            },
+            itemCount: snapshot.data.length,
+          );
+        } else if (snapshot.data.length == 0) {
           return Center(child: Text('Adicione um produto'));
+        } else {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
         }
-           return Center(
-             child: CircularProgressIndicator(),
-           );
       },
     );
-  }
-
-  @override
-  void initState() {
-    super.initState();
   }
 
   @override
@@ -55,7 +48,7 @@ class _ProdutosFormState extends State<ProdutosForm> {
     super.didChangeDependencies();
     _bloc = ProdutoBlocProvider.of(context);
     _loginBloc = LoginBlocProvider.of(context);
-    _loginBloc.getUsuario().then((onValue){
+    _loginBloc.getUsuario().then((onValue) {
       _bloc.mudarUsuarioId(onValue.uid);
       _bloc.getListaProdutos();
     });
@@ -65,5 +58,6 @@ class _ProdutosFormState extends State<ProdutosForm> {
   void dispose() {
     super.dispose();
     _bloc.dispose();
+    _loginBloc.dispose();
   }
 }

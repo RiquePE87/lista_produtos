@@ -21,7 +21,7 @@ class Repositorio {
 
   void fazerLogOut() => _firebaseProvider.fazerLogOut();
 
-  void salvarProduto(String nome, String descricao, String preco, String imagem,
+  void salvarProduto(String nome, String descricao, double preco, String imagem,
           String usuarioId) =>
       _firebaseProvider.salvarProduto(
           nome, descricao, preco, imagem, usuarioId);

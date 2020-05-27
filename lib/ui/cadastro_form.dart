@@ -5,6 +5,7 @@ import 'package:listaprodutos/blocs/login_bloc.dart';
 import 'package:listaprodutos/blocs/login_bloc_provider.dart';
 import 'package:listaprodutos/blocs/produto_bloc.dart';
 import 'package:listaprodutos/blocs/produto_bloc_provider.dart';
+import 'package:listaprodutos/ui/produtos.dart';
 
 class CadastroForm extends StatefulWidget {
   @override
@@ -18,15 +19,17 @@ class _CadastroFormState extends State<CadastroForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        imagem(),
-        Text('Adicionar Foto'),
-        campoNome(),
-        campoDescricao(),
-        campoPreco(),
-        button()
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          imagem(),
+          Text('Adicionar Foto'),
+          campoNome(),
+          campoDescricao(),
+          campoPreco(),
+          botaoEntrar()
+        ],
+      ),
     );
   }
 
@@ -70,16 +73,6 @@ class _CadastroFormState extends State<CadastroForm> {
           child: AspectRatio(
             aspectRatio: 0.9,
             child: Image.asset('images/placeholder.png')
-//            Carousel(
-//              images: [snapshot.data['image']],
-//              boxFit: BoxFit.cover,
-//              defaultImage: Image.asset('images/placeholder.png'),
-//              dotSize: 4.0,
-//              dotSpacing: 15.0,
-//              dotBgColor: Colors.transparent,
-//              dotColor: Theme.of(context).primaryColor,
-//              autoplay: false,
-//            ),
           )
         );
       },
@@ -116,11 +109,11 @@ class _CadastroFormState extends State<CadastroForm> {
       child: Text('Salvar'),
       onPressed: () {
         if (_bloc.validarCampos()){
-
           _bloc.mudarUsuarioId(usuario.uid);
           _bloc.mudarImagem('imagem');
           _bloc.registrarProduto();
-          Navigator.of(context).pop();
+          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Produtos()));
+//          Navigator.pop(context);
         } else {
           showErrorMessage();
         }
@@ -128,18 +121,18 @@ class _CadastroFormState extends State<CadastroForm> {
     );
   }
 
-//  Widget botaoEntrar() {
-//    return StreamBuilder(
-//      stream: _bloc.isLogado,
-//      builder: (context, AsyncSnapshot<bool> snapshot) {
-//        if (!snapshot.hasData || snapshot.error) {
-//          return button();
-//        } else {
-//          return CircularProgressIndicator();
-//        }
-//      },
-//    );
-//  }
+  Widget botaoEntrar() {
+    return StreamBuilder(
+      stream: _loginBloc.statusLogin,
+      builder: (context, AsyncSnapshot<bool> snapshot) {
+        if (!snapshot.hasData || snapshot.error) {
+          return button();
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
+    );
+  }
 
   void showErrorMessage() {
     final snackbar = SnackBar(

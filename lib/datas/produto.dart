@@ -5,15 +5,17 @@ class Produto{
 
   String usuarioId;
   String id;
+  double preco;
   String titulo;
   String descricao;
-  String image;
+  String imagem;
 
   Produto.fromDocument(DocumentSnapshot snapshot){
     id = snapshot.documentID;
     usuarioId = snapshot.data['usuarioId'];
     titulo = snapshot.data['nome'];
+    preco = snapshot.data['preco'];
     descricao = snapshot.data['descricao'];
-    image = snapshot.data['imagem'];
+    imagem = snapshot.data['imagem'];
   }
 }

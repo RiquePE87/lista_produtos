@@ -27,7 +27,7 @@ class ProdutoBloc {
   Function(String) get mudarUsuarioId => _usuarioId.sink.add;
 
   registrarProduto() {
-    return _repositorio.salvarProduto(_nome.value, _descricao.value, _preco.value,
+    return _repositorio.salvarProduto(_nome.value, _descricao.value, double.parse(_preco.value),
         _imagem.value, _usuarioId.value);
   }
 
@@ -46,7 +46,7 @@ class ProdutoBloc {
   bool validarCampos(){
     if (_nome.value != null && _nome.value.isNotEmpty &&
         _descricao.value != null && _descricao.value.isNotEmpty &&
-        _preco.value != null && _preco.value.isNotEmpty){
+        _preco.value != null){
       return true;
     }
     else return false;

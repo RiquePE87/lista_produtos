@@ -10,6 +10,7 @@ class Cadastro extends StatelessWidget {
         centerTitle: true,
       ),
       body: Container(
+
         child: CadastroForm(),
       )
     );
